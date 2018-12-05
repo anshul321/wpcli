@@ -47,7 +47,7 @@ WP-CLI version:	1.5.1
 
 4. Activate a plugin  :question:
 
-:heavy_dollar_sign: wp plugin activate pluginname ( see the name from pugin list as shown in above command)
+:heavy_dollar_sign: wp plugin activate plugin_name ( see the name from plugin list as shown in above command)
 ```
  /var/www/html/wordpress  wp plugin activate hello
 Plugin 'hello' activated.
@@ -94,9 +94,9 @@ Password: a$hgLg3HeZJsy%sOnsZG!qes
 
 7. Update an user password. :question:
 
-:heavy_dollar_sign: wp user update **user_id**  --user_pass=**new_passowrd**
+:heavy_dollar_sign: wp user update **user_id**  --user_pass=**new_password**
 ```
- /var/www/html/wordoress  wp user update 2 --user_pass=admin@123
+ /var/www/html/wordoress  wp user update 2 --user_pass=your_new_password
 Success: Updated user 2.
 
 ```
@@ -142,4 +142,49 @@ Success: Created '/var/www/html/wordpress/wp-content/themes/twentysixteen-child'
 Deleted '**themename**' theme.
 Success: Deleted 1 of 1 themes.
 ```
+11. Flushes rewrite rules ( permalink updates ). :question:
 
+:heavy_dollar_sign: wp rewrite flush
+```
+ /var/www/html/wordpress  wp rewrite flush
+Success: Rewrite rules flushed.
+```
+
+12. Get dtabase name with list of tables. :question:
+
+:heavy_dollar_sign: wp db check 
+```
+ /var/www/html/wordpress  wp db check 
+db_name.prefix_tableName                           OK
+wppwa.wppwa_comments                               OK
+...................................
+..................................
+Success: Database checked.
+```
+
+13. Update siteurl and home url ( search and replace any string) . :question:
+
+:heavy_dollar_sign: wp search-replace 'http://localhost/projectname' 'http://projectname.com' --skip-columns=guid 
+```
+ /var/www/html/wordpress  wp search-replace 'http://localhost/projectname' 'http://projectname.com' --skip-columns=guid 
++---------------------+-----------------------+--------------+------+
+| Table               | Column                | Replacements | Type |
++---------------------+-----------------------+--------------+------+
+| wppwa_commentmeta   | meta_key              | 0            | SQL  |
+| wppwa_commentmeta   | meta_value            | 0            | SQL  |
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ wppwa_options        | option_value           | 2            | PHP |
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+| wppwa_users         | user_activation_key   | 0            | SQL  |
+| wppwa_users         | display_name          | 0            | SQL  |
++---------------------+-----------------------+--------------+------+
+
+
+Success: Made 8 replacements.
+```
+
+# Download, Fork, Commit.
+
+Please Download, Fork, & Commit to add more helpfull commands.
